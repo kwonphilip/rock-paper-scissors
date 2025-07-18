@@ -1,0 +1,1 @@
+This is a simple rock paper scissors game. Open the console in the browser to see the scores and results.
