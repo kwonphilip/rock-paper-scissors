@@ -37,14 +37,13 @@ function updateScore(winner) {
 }
 
 function declareWinner(winner, humanChoice, computerChoice) {
-    if (winner == 'human') console.log(`You Win! ${humanChoice} beats ${computerChoice}`);
-    if (winner == 'computer') console.log(`You Lose! ${computerChoice} beats ${humanChoice}`);
-    if (winner == 'tie') console.log(`Tie! You both chose ${humanChoice}`);
+    if (winner == 'human') result.textContent = `You Win! ${humanChoice} beats ${computerChoice}`;
+    if (winner == 'computer') result.textContent = `You Lose! ${computerChoice} beats ${humanChoice}`;
+    if (winner == 'tie') result.textContent = `Tie! You both chose ${humanChoice}`;
 }
 
-function playRound() {
+function playRound(humanChoice) {
     const computerChoice = getComputerChoice();
-    const humanChoice = getHumanChoice();
     const winner = getWinner(computerChoice, humanChoice);
     updateScore(winner);
     declareWinner(winner, humanChoice, computerChoice);
@@ -56,10 +55,11 @@ function declareGameWinner() {
     return console.log('Tie game!');
 }
 
+const result = document.querySelector('#result');
 const buttons = document.querySelectorAll('button');
 
 buttons.forEach((button) => {
-    button.addEventListener('click', (event) => {
-        alert(button.id);
+    button.addEventListener('click', () => {
+        playRound(button.id);
     });
 });
