@@ -56,17 +56,10 @@ function declareGameWinner() {
     return console.log('Tie game!');
 }
 
-function playGame() {
-    humanScore = 0;
-    computerScore = 0;
-    
-    for(let i = 1; i < 6; i++) {
-        console.log(`Round ${i}`)
-        playRound();
-        console.log(`Human Score: ${humanScore}   |   Computer Score: ${computerScore}`);
-    }
+const buttons = document.querySelectorAll('button');
 
-    declareGameWinner();
-}
-
-playGame();
+buttons.forEach((button) => {
+    button.addEventListener('click', (event) => {
+        alert(button.id);
+    });
+});
