@@ -41,6 +41,8 @@ function playRound(humanChoice) {
     if (humanScore == 5 || computerScore == 5) {
         humanScore = 0;
         computerScore = 0;
+        const winner = document.querySelector('#winner');
+        winner.textContent = '';
     }
 
     const computerChoice = getComputerChoice();
