@@ -11,12 +11,6 @@ function getComputerChoice() {
     return 'scissors';
 }
 
-function getHumanChoice() {
-    const choice = prompt('Choose rock, paper, or scissors: ');
-
-    return choice.toLowerCase();
-}
-
 function getWinner(computer, human) {
     if (computer == 'rock' && human == 'rock') return 'tie';
     if (computer == 'rock' && human == 'paper') return 'human';
@@ -43,20 +37,34 @@ function declareWinner(winner, humanChoice, computerChoice) {
 }
 
 function playRound(humanChoice) {
+    // Reset after game winner (i.e. game win = first to 5 points)
+    if (humanScore == 5 || computerScore == 5) {
+        humanScore = 0;
+        computerScore = 0;
+    }
+
     const computerChoice = getComputerChoice();
     const winner = getWinner(computerChoice, humanChoice);
     updateScore(winner);
     declareWinner(winner, humanChoice, computerChoice);
+    score.textContent = `Human Score: ${humanScore}   |   Computer Score: ${computerScore}`;
+
+    if (humanScore == 5 || computerScore == 5) {
+        declareGameWinner();
+    }
 }
 
 function declareGameWinner() {
-    if (humanScore > computerScore) return console.log('You won the game!');
-    if (computerScore > humanScore) return console.log('Computer won the game!');
-    return console.log('Tie game!');
+    if (humanScore > computerScore) winner.textContent = 'You won the game!';
+    if (computerScore > humanScore) winner.textContent = 'Computer won the game!';
 }
 
+const score = document.querySelector('#score');
 const result = document.querySelector('#result');
 const buttons = document.querySelectorAll('button');
+const winner = document.querySelector('#winner');
+
+score.textContent = `Human Score: ${humanScore}   |   Computer Score: ${computerScore}`;
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
